@@ -1,5 +1,3 @@
-include_recipe 'nginx::default'
-
 node['sites'].each do |name, site|
   node['site_defaults'].each do |key, default_value|
     node.set_unless['sites'][name][key] = default_value
@@ -10,12 +8,21 @@ node['sites'].each do |name, site|
 end
 node.save unless Chef::Config[:solo]
 
+include_recipe 'website::user'
+include_recipe 'nginx::default'
+
 node['sites'].each do |name, site|
 
-  user site['owner']
-  group 'http' do
-    append true
-    members site['owner']
+  if site['git']
+    git site['root'] do
+      repository site['git']['repository']
+      checkout_branch site['git']['branch']
+      enable_submodules true
+      user site['owner']
+      group 'http'
+      ssh_wrapper File.join('/home', site['owner'], '.ssh', 'deploy_wrapper.sh')
+      action :sync
+    end
   end
 
   [

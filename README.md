@@ -24,7 +24,6 @@ Sites are added by populating the `sites` attribute on your webserver node, like
 ```json
 "sites": {
   "simple.example":  {
-    "owner": "some_user",
     "root": "/sites/simple.example"
   }
 }
@@ -36,11 +35,11 @@ See the [logankoester/chef-nginx](github.com/logankoester/chef-nginx) cookbook f
 
 ### PHP support
 
-If any sites on a node have the optional `language` attribute set to `php`, then `php-fpm` will be installed and configured for that site.
+If any sites on a node have a truthy `php` attribute, then `php-fpm` will be installed and configured for that site.
 
 ```json
 { 
-  "language": "php"
+  "php": true
 }
 ```
 
@@ -61,6 +60,27 @@ If a site has the optional `ssl` attribute, then an SSL certificate will be crea
 You can create a self-signed certificate (default), or read a custom one from attributes, data bags or chef-vaults.
 
 See the [ssl_certificate](https://supermarket.getchef.com/cookbooks/ssl_certificate) cookbook for details.
+
+### User accounts
+
+If you specify an `owner`, that user will be created if missing and added to the `http` group. A home directory will
+be created at `/home/#{owner}` and populated with these files:
+
+* `.gitconfig`
+* `.ssh/config`
+* `.ssh/deploy_wrapper.sh`
+* `.ssh/deploy_key` (see below)
+
+If any of these files already exist, they will be left alone, so you can add sites to existing accounts
+if you want to - but you may need to tweak yours if you want to deploy.
+
+The `.ssh/deploy_key` file will be generated if you have set the `deploy_key.credentials` property on a site.
+
+This key will be added to your account at the repository provider and subsequently used to deploy these sites.
+
+See the [deploy_key](https://supermarket.getchef.com/cookbooks/deploy_key) cookbook for authorization details.
+
+> Note that if you want to use different deploy keys for different sites you must separate them by putting those sites under a different owner (system account).
 
 ## Author
 

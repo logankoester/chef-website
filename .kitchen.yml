@@ -44,6 +44,5 @@ suites:
             allow_multisite: false
             wp_siteurl: 'https://default.example/'
             wp_home: 'https://default.example/'
-
           ssl:
             common_name: 'default.example'
