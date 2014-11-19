@@ -1,0 +1,14 @@
+{
+  "id": "site_admin",
+  "password": "some_hash",
+  "uid": 1000,
+  "shell": "\/bin\/bash",
+  "comment": "A human website admin",
+  "groups": [
+    "site_admin",
+    "http"
+  ],
+  "ssh_keys": [
+    "site_admin_key"
+  ]
+}

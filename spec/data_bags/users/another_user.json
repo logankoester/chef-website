@@ -1,0 +1,13 @@
+{
+  "id": "another_user",
+  "password": "some_hash",
+  "uid": 1001,
+  "shell": "\/bin\/bash",
+  "comment": "A human without website access",
+  "groups": [
+    "another_user"
+  ],
+  "ssh_keys": [
+    "another_user_key"
+  ]
+}
