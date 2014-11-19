@@ -16,6 +16,3 @@ default['site_defaults']['php'] = false
 
 # Is this a Wordpress site?
 default['site_defaults']['wordpress'] = false
-
-# Toggle gzip compression
-default['site_defaults']['gzip'] = true
