@@ -35,7 +35,7 @@ describe 'website::default' do
             owner: 'php_site_owner',
             root: '/sites/php_site',
             server_names: ['php_site.example'],
-            language: 'php'
+            php: true
           }
         }
       end.converge(described_recipe)

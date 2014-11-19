@@ -20,3 +20,10 @@ end
     it { should be_file }
   end
 end
+
+describe file('/etc/nginx/sites/default.example.conf') do
+  its(:content) { should match /listen 443;/ }
+  its(:content) { should match /ssl on;/ }
+  its(:content) { should match /ssl_certificate .*default\.example\.pem;/ }
+  its(:content) { should match /ssl_certificate_key .*default\.example\.key;/ }
+end

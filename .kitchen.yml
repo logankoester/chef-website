@@ -33,6 +33,8 @@ suites:
             - 'www.default.example'
           owner: 'default'
           root: '/sites/default.example'
-          language: 'php'
+          php: true
+          wordpress:
+            wp_super_cache: true
           ssl:
             common_name: 'default.example'

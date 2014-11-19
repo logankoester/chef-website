@@ -30,13 +30,8 @@ node['sites'].each do |name, site|
     end
   end
 
-  if site['language'] && site['language'].downcase == 'php'
-    include_recipe 'nginx::php_fpm'
-  end
-
-  if site['ssl']
-    include_recipe 'website::ssl'
-  end
+  include_recipe 'nginx::php_fpm' if site['php']
+  include_recipe 'website::ssl' if site['ssl']
 
   template "/etc/nginx/sites/#{name}.conf" do
     mode '0644'

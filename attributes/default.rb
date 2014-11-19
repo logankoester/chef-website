@@ -10,3 +10,12 @@ default['site_defaults']['owner'] = 'http'
 
 # Relative path from site.root where files should be served
 default['site_defaults']['web_root'] = 'www'
+
+# Does this site need PHP?
+default['site_defaults']['php'] = false
+
+# Is this a Wordpress site?
+default['site_defaults']['wordpress'] = false
+
+# Toggle gzip compression
+default['site_defaults']['gzip'] = true

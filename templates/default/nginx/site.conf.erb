@@ -1,7 +1,6 @@
 <% if @site['ssl'] %>
 server {
   listen 443;
-
   server_name <%= @site['server_names'].join(' ') %>;
   root <%= File.join(@site['root'], @site['web_root']) %>;
 
@@ -10,15 +9,42 @@ server {
   key_path: File.join(@site['root'], 'ssl', 'keys', "#{@name}.key")
 } %>
 
-<%= render 'nginx/gzip.conf.erb' %>
+<%= render 'nginx/static.conf.erb' %>
+
+<%= render 'nginx/gzip.conf.erb' if @site['gzip'] %>
+
+<%= render 'nginx/php.conf.erb', :variables => {
+  name: @name,
+  site: @site
+} if @site['php'] %>
+
+<%= render 'nginx/wordpress.conf.erb', :variables => {
+  name: @name,
+  site: @site
+} if @site['wordpress'] %>
+
+<%= render 'nginx/wordpress_wp_super_cache.conf.erb' if @site['wordpress'] && @site['wordpress']['wp_super_cache'] %>
 }
 
 <% end %>
 server {
   listen 80;
-
   server_name <%= @site['server_names'].join(' ') %>;
   root <%= File.join(@site['root'], @site['web_root']) %>;
 
-<%= render 'nginx/gzip.conf.erb' %>
+<%= render 'nginx/static.conf.erb' %>
+
+<%= render 'nginx/gzip.conf.erb' if @site['gzip'] %>
+
+<%= render 'nginx/php.conf.erb', :variables => {
+  name: @name,
+  site: @site
+} if @site['php'] %>
+
+<%= render 'nginx/wordpress.conf.erb', :variables => {
+  name: @name,
+  site: @site
+} if @site['wordpress'] %>
+
+<%= render 'nginx/wordpress_wp_super_cache.conf.erb' if @site['wordpress'] && @site['wordpress']['wp_super_cache'] %>
 }
