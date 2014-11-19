@@ -61,4 +61,5 @@ desc 'Run all tests on Travis'
 task travis: %w(style unit)
 
 # Default
-task default: ['style', 'unit', 'integration:kitchen:all']
+task test: ['style', 'unit', 'integration:kitchen:all']
+task default: ['test']
