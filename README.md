@@ -63,7 +63,7 @@ See the [ssl_certificate](https://supermarket.getchef.com/cookbooks/ssl_certific
 
 ### User accounts
 
-If you specify an `owner`, that user will be created if missing and added to the `http` group. A home directory will
+If you specify an `owner`, that user will be created if missing and added to the `http` group. If no owner is specified, a default `http` user will be used. A home directory will
 be created at `/home/#{owner}` and populated with these files:
 
 * `.gitconfig`
