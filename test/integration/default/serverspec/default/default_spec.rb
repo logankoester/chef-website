@@ -1,28 +1,23 @@
 require 'spec_helper'
 
-describe package('nginx') do
-  it { should be_installed }
+[
+  file('/sites/default.example'),
+  file('/sites/default.example/ssl'),
+  file('/sites/default.example/ssl/keys'),
+  file('/sites/default.example/ssl/certs')
+].each do |path|
+  describe path do
+    it { should be_directory }
+    it { should be_owned_by 'default' }
+    it { should be_grouped_into 'http' }
+  end
 end
 
-describe service('nginx') do
-  it { should be_running }
-end
-
-describe file('/etc/nginx/sites') do
-  it { should be_directory }
-end
-
-describe file('/etc/nginx/nginx.conf') do
-  it { should be_file }
-  it { should be_mode 644 }
-  it { should be_owned_by 'root' }
-  its(:content) { should match /include sites\/\*.conf;/ }
-end
-
-describe package('php-fpm') do
-  it { should be_installed }
-end
-
-describe service('php-fpm') do
-  it { should be_running }
+[
+  file('/sites/default.example/ssl/keys/default.example.key'),
+  file('/sites/default.example/ssl/certs/default.example.pem')
+].each do |path|
+  describe path do
+    it { should be_file }
+  end
 end

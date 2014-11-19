@@ -1,5 +1,7 @@
 require 'serverspec'
 
+set :backend, :exec
+
 RSpec.configure do |c|  
   if ENV['ASK_SUDO_PASSWORD']
     require 'highline/import'

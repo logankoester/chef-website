@@ -32,10 +32,17 @@ describe 'website::default' do
         set_attributes_for node
         node.set['sites'] = {
           php_site: {
+            owner: 'php_site_owner',
+            root: '/sites/php_site',
             language: 'php'
           }
         }
       end.converge(described_recipe)
+    end
+
+    it 'should create the site owner' do
+      expect(chef_run).to create_user 'php_site_owner'
+      expect(chef_run).to create_group 'http'
     end
 
     it 'should include the nginx::php_fpm recipe' do
@@ -45,6 +52,13 @@ describe 'website::default' do
     it 'should not include the website::ssl recipe' do
       expect(chef_run).not_to include_recipe 'website::ssl'
     end
+
+    it 'should create the site root' do
+      expect(chef_run).to create_directory('/sites/php_site').with(
+        user: 'php_site_owner',
+        group: 'http'
+      )
+    end
   end
 
   context 'with an SSL site' do
@@ -53,6 +67,8 @@ describe 'website::default' do
         set_attributes_for node
         node.set['sites'] = {
           ssl_site: {
+            owner: 'ssl_site_owner',
+            root: '/sites/ssl_site',
             ssl: true
           }
         }

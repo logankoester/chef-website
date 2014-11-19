@@ -13,8 +13,12 @@ describe 'website::ssl' do
     ChefSpec::SoloRunner.new do |node|
       set_attributes_for node
       node.set['sites'] = {
-        non_ssl_site: {},
+        non_ssl_site: {
+          owner: 'non_ssl_site_owner',
+          root: '/sites/non_ssl_site'
+        },
         ssl_site: {
+          owner: 'ssl_site_owner',
           root: '/sites/ssl_site',
           ssl: {
             common_name: 'non_ssl_site.example'
@@ -22,6 +26,11 @@ describe 'website::ssl' do
         },
       }
     end.converge(described_recipe)
+  end
+
+  it 'should create the ssl directories' do
+    expect(chef_run).to create_directory '/sites/ssl_site/ssl/keys'
+    expect(chef_run).to create_directory '/sites/ssl_site/ssl/certs'
   end
 
 end
