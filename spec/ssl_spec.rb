@@ -15,8 +15,8 @@ describe 'website::ssl' do
       node.set['sites'] = {
         non_ssl_site: {
           owner: 'non_ssl_site_owner',
-          root: '/sites/non_ssl_site'
-          server_names: ['non_ssl_site.example'],
+          root: '/sites/non_ssl_site',
+          server_names: ['non_ssl_site.example']
         },
         ssl_site: {
           owner: 'ssl_site_owner',

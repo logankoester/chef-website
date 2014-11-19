@@ -1,7 +1,9 @@
 <% if @site['ssl'] %>
 server {
-  server_name <%= @site['server_names'].join(' ') %>;
   listen 443;
+
+  server_name <%= @site['server_names'].join(' ') %>;
+  root <%= File.join(@site['root'], @site['web_root']) %>;
 
 <%= render 'nginx/ssl.conf.erb', :variables => {
   cert_path: File.join(@site['root'], 'ssl', 'certs', "#{@name}.pem"),
@@ -13,8 +15,10 @@ server {
 
 <% end %>
 server {
-  server_name <%= @site['server_names'].join(' ') %>;
   listen 80;
+
+  server_name <%= @site['server_names'].join(' ') %>;
+  root <%= File.join(@site['root'], @site['web_root']) %>;
 
 <%= render 'nginx/gzip.conf.erb' %>
 }

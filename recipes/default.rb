@@ -1,9 +1,15 @@
 include_recipe 'nginx::default'
 
 node['sites'].each do |name, site|
-  raise "Attribute is missing a required property: sites.#{name}.owner" unless site['owner']
-  raise "Attribute is missing a required property: sites.#{name}.root" unless site['root']
-  raise "Attribute is missing a required property: sites.#{name}.server_names" unless site['server_names']
+  node['site_defaults'].each do |key, default_value|
+    node.default['sites'][name][key] = default_value
+  end
+
+  node.default['sites'][name]['root'] = "/sites/#{name}"
+  node.default['sites'][name]['server_names'] = [name]
+end
+
+node['sites'].each do |name, site|
 
   user site['owner']
   group 'http' do
@@ -11,12 +17,17 @@ node['sites'].each do |name, site|
     members site['owner']
   end
 
-  directory site['root'] do
-    owner site['owner']
-    group 'http'
-    mode '0771'
-    action :create
-    recursive true
+  [
+    site['root'],
+    File.join(site['root'], site['web_root'])
+  ].each do |new_path|
+    directory new_path do
+      owner site['owner']
+      group 'http'
+      mode '0771'
+      action :create
+      recursive true
+    end
   end
 
   if site['language'] && site['language'].downcase == 'php'
