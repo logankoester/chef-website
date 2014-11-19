@@ -1,12 +1,8 @@
 include_recipe 'nginx::default'
 
 node['sites'].each do |name, site|
-  [
-    File.join(site['root'], 'ssl'),
-    File.join(site['root'], 'ssl', 'keys'),
-    File.join(site['root'], 'ssl', 'certs')
-  ].each do |new_path|
-    directory new_path do
+  ['ssl', 'ssl/keys', 'ssl/certs'].each do |new_path|
+    directory "#{site_root}/#{new_path)}" do
       owner site['owner']
       group 'http'
       mode '0600'
