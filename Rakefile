@@ -5,7 +5,9 @@ namespace :style do
   begin
     require 'rubocop/rake_task'
     desc 'Run Ruby style checks'
-    RuboCop::RakeTask.new(:ruby)
+    RuboCop::RakeTask.new(:ruby) do |task|
+      task.fail_on_error = false
+    end
   rescue LoadError
     puts '>>>>> Rubocop gem not loaded, omitting tasks' unless ENV['CI']
   end
