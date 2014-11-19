@@ -1,9 +1,0 @@
-  # Add trailing slash to */wp-admin requests.
-  rewrite /wp-admin$ $scheme://$host$uri/ permanent;
-
-  # The all-in-one-event-calendar (time.ly) wordpress plugin theme seems to have
-  # a bug in 2.0.9 causing it to request its css file at / rather than at /events.
-  # This workaround ensures it is available at both locations.
-  if ($query_string ~ "^(ai1ec_render_css=.*)$") {
-    rewrite ^/$ /events/$1 redirect;
-  } 

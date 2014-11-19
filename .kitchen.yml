@@ -34,7 +34,6 @@ suites:
           owner: 'default'
           root: '/sites/default.example'
           php: true
-          wordpress:
-            wp_super_cache: true
+          wordpress: true
           ssl:
             common_name: 'default.example'
