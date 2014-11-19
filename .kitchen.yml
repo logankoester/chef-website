@@ -14,7 +14,7 @@ platforms:
       require_chef_omnibus: false
       provision_command:
         - pacman -S --noconfirm --needed supervisor
-      run_command: '/usr/sbin/sshd -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes && /usr/sbin/supervisord -c /etc/supervisord.conf -n'
+      run_command: 'sh -c "/usr/sbin/sshd -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes && /usr/sbin/supervisord -c /etc/supervisord.conf -n"'
 
 suites:
   - name: default
@@ -28,6 +28,8 @@ suites:
         supervisor: true
       sites:
         'default.example':
+          owner: 'default'
+          root: '/sites/default.example'
           language: 'php'
           ssl:
             common_name: 'default.example'
