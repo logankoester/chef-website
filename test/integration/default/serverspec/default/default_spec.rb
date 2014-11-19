@@ -8,13 +8,11 @@ end
 
 describe file('/etc/nginx/sites/default.example.conf') do
   it { should be_file }
-  its(:content) {
-    should match /server_name default\.example www\.default\.example;/
-    should match /listen 80;/
-    should match /listen 443;/
-    should match /ssl on;/
-    should match /ssl_certificate .*default\.example\.pem;/
-    should match /ssl_certificate_key .*default\.example\.key;/
-    should match /gzip on;/
-  }
+  its(:content) { should match /server_name default\.example www\.default\.example;/ }
+  its(:content) { should match /listen 80;/ }
+  its(:content) { should match /listen 443;/ }
+  its(:content) { should match /ssl on;/ }
+  its(:content) { should match /ssl_certificate .*default\.example\.pem;/ }
+  its(:content) { should match /ssl_certificate_key .*default\.example\.key;/ }
+  its(:content) { should match /gzip on;/ }
 end
