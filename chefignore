@@ -11,3 +11,5 @@
 */.svn/*
 
 tmp/
+
+.kitchen/
