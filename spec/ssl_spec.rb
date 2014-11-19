@@ -16,10 +16,12 @@ describe 'website::ssl' do
         non_ssl_site: {
           owner: 'non_ssl_site_owner',
           root: '/sites/non_ssl_site'
+          server_names: ['non_ssl_site.example'],
         },
         ssl_site: {
           owner: 'ssl_site_owner',
           root: '/sites/ssl_site',
+          server_names: ['ssl_site.example'],
           ssl: {
             common_name: 'non_ssl_site.example'
           }

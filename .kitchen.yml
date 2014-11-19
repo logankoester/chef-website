@@ -28,6 +28,9 @@ suites:
         supervisor: true
       sites:
         'default.example':
+          server_names:
+            - 'default.example'
+            - 'www.default.example'
           owner: 'default'
           root: '/sites/default.example'
           language: 'php'

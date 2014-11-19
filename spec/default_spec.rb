@@ -34,6 +34,7 @@ describe 'website::default' do
           php_site: {
             owner: 'php_site_owner',
             root: '/sites/php_site',
+            server_names: ['php_site.example'],
             language: 'php'
           }
         }
@@ -59,6 +60,10 @@ describe 'website::default' do
         group: 'http'
       )
     end
+
+    it 'should render the nginx/site.conf.erb template' do
+      expect(chef_run).to render_file('/etc/nginx/sites/php_site.conf').with_content /listen 80;/
+    end
   end
 
   context 'with an SSL site' do
@@ -69,6 +74,7 @@ describe 'website::default' do
           ssl_site: {
             owner: 'ssl_site_owner',
             root: '/sites/ssl_site',
+            server_names: ['ssl_site.example'],
             ssl: true
           }
         }
@@ -77,6 +83,10 @@ describe 'website::default' do
 
     it 'should include the website::ssl recipe' do
       expect(chef_run).to include_recipe 'website::ssl'
+    end
+
+    it 'should render the nginx/site.conf.erb template with SSL configured' do
+      expect(chef_run).to render_file('/etc/nginx/sites/ssl_site.conf').with_content(/listen 443;/)
     end
   end
 
