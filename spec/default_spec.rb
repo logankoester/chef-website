@@ -75,7 +75,9 @@ describe 'website::default' do
             owner: 'ssl_site_owner',
             root: '/sites/ssl_site',
             server_names: ['ssl_site.example'],
-            ssl: true
+            ssl: {
+              common_name: 'ssl_site.example'
+            }
           }
         }
       end.converge(described_recipe)
@@ -85,8 +87,50 @@ describe 'website::default' do
       expect(chef_run).to include_recipe 'website::ssl'
     end
 
+    it 'should create the ssl directories' do
+      expect(chef_run).to create_directory '/sites/ssl_site/ssl/keys'
+      expect(chef_run).to create_directory '/sites/ssl_site/ssl/certs'
+    end
+
     it 'should render the nginx/site.conf.erb template with SSL configured' do
       expect(chef_run).to render_file('/etc/nginx/sites/ssl_site.conf').with_content(/listen 443;/)
+    end
+
+  end
+
+  context 'with a Wordpress site' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new do |node|
+        set_attributes_for node
+        node.set['sites'] = {
+          wordpress_site: {
+            owner: 'wordpress_site_owner',
+            root: '/sites/wordpress_site',
+            web_root: 'www',
+            server_names: ['wordpress_site.example'],
+            php: true,
+            wordpress: {
+              db: {
+                name: 'default',
+                user: 'default',
+                pass: 'default',
+                host: 'localhost'
+              },
+              allow_multisite: false,
+              wp_siteurl: 'http://wordpress_site.example/',
+              wp_home: 'http://wordpress_site..example/'
+            }
+          }
+        }
+      end.converge(described_recipe)
+    end
+
+    it 'should include the website::wordpress recipe' do
+      expect(chef_run).to include_recipe 'website::wordpress'
+    end
+
+    it 'should render the wordpress/wp-config.php.erb template' do
+      expect(chef_run).to render_file('/sites/wordpress_site/www/wp-config.php')
     end
   end
 

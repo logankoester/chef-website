@@ -2,12 +2,13 @@ include_recipe 'nginx::default'
 
 node['sites'].each do |name, site|
   node['site_defaults'].each do |key, default_value|
-    node.default['sites'][name][key] = default_value
+    node.set_unless['sites'][name][key] = default_value
   end
 
-  node.default['sites'][name]['root'] = "/sites/#{name}"
-  node.default['sites'][name]['server_names'] = [name]
+  node.set_unless['sites'][name]['root'] = "/sites/#{name}"
+  node.set_unless['sites'][name]['server_names'] = [name]
 end
+node.save unless Chef::Config[:solo]
 
 node['sites'].each do |name, site|
 
@@ -32,6 +33,7 @@ node['sites'].each do |name, site|
 
   include_recipe 'nginx::php_fpm' if site['php']
   include_recipe 'website::ssl' if site['ssl']
+  include_recipe 'website::wordpress' if site['wordpress']
 
   template "/etc/nginx/sites/#{name}.conf" do
     mode '0644'

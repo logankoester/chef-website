@@ -9,3 +9,5 @@ supports 'arch'
 
 depends 'nginx'
 depends 'ssl_certificate'
+depends 'pacman'
+depends 'openssl'
