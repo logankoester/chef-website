@@ -2,6 +2,7 @@
 > A [Chef](http://getchef.com/) cookbook to install and configure sites for a webserver.
 
 [![Build Status](http://ci.ldk.io/logankoester/chef-website/badge)](http://ci.ldk.io/logankoester/chef-website/)
+[![Test Coverage](https://codeclimate.com/github/logankoester/chef-website/badges/coverage.svg)](https://codeclimate.com/github/logankoester/chef-website)
 [![Gittip](http://img.shields.io/gittip/logankoester.png)](https://www.gittip.com/logankoester/)
 
 This cookbook is used for cloning websites to a server from Github repos. Static HTML sites, PHP sites, and Wordpress sites are all supported - pull requests to add support for additional types of website will be considered and appreciated.
