@@ -13,16 +13,25 @@ include_recipe 'nginx::default'
 
 node['sites'].each do |name, site|
 
-  git "git_sync_#{name}" do
-    destination site['root']
-    repository site['git']['repository']
-    checkout_branch site['git']['branch']
-    enable_submodules true
-    user site['owner']
+  if site['git']
+    git "git_sync_#{name}" do
+      destination site['root']
+      repository site['git']['repository']
+      checkout_branch site['git']['branch']
+      enable_submodules true
+      user site['owner']
+      group 'http'
+      ssh_wrapper File.join('/home', site['owner'], '.ssh', 'deploy_wrapper.sh')
+      action :sync
+    end
+  end
+
+  directory site['root'] do
+    owner site['owner']
     group 'http'
-    ssh_wrapper File.join('/home', site['owner'], '.ssh', 'deploy_wrapper.sh')
-    action :sync
-    only_if { site['git'] }
+    mode '0771'
+    action :create
+    recursive true
   end
 
   directory File.join(site['root'], site['web_root']) do

@@ -25,19 +25,18 @@ node['sites'].each do |name, site|
     action :create
   end
 
-  deploy_key "#{name}_deploy_key" do
-    label 'deploy_key'
-    provider Chef::Provider::DeployKeyGithub
-    path "/home/#{username}/.ssh"
-    credentials site['deploy_key']['credentials']
-    repo site['git']['repository']
-    owner username
-    group username
-    mode '0700'
-    action [:create, :add]
-    only_if {
-      site['git'] && site['git']['repository'] && site['deploy_key'] && site['deploy_key']['credentials']
-    }
+  if site['git'] && site['git']['repository'] && site['deploy_key'] && site['deploy_key']['credentials']
+    deploy_key "#{name}_deploy_key" do
+      label 'deploy_key'
+      provider Chef::Provider::DeployKeyGithub
+      path "/home/#{username}/.ssh"
+      credentials site['deploy_key']['credentials']
+      repo site['git']['repository']
+      owner username
+      group username
+      mode '0700'
+      action [:create, :add]
+    end
   end
 
   template File.join('/home', username, '.ssh', "deploy_wrapper.sh") do
