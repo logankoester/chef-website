@@ -1,0 +1,10 @@
+{
+  "id": "ssl_site",
+  "owner": "ssl_site_owner",
+  "root": "/sites/ssl_site",
+  "web_root": "www",
+  "server_names": ["ssl_site.example"],
+  "ssl": {
+    "common_name": "ssl_site.example"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "wordpress_site",
+  "owner": "wordpress_site_owner",
+  "root": "/sites/wordpress_site",
+  "web_root": "www",
+  "server_names": ["wordpress_site.example"],
+  "php": true,
+  "wordpress": {
+    "db": {
+      "name": "default",
+      "user": "default",
+      "pass": "default",
+      "host": "localhost"
+    },
+    "allow_multisite": false,
+    "wp_siteurl": "http://wordpress_site.example/",
+    "wp_home": "http://wordpress_site..example/"
+  }
+}

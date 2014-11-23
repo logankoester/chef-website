@@ -1,6 +1,10 @@
 include_recipe 'nginx::default'
 
-node['sites'].each do |name, site|
+sites = data_bag 'sites'
+sites.each do |site_id|
+  next unless node['sites'].include? site_id
+  site = data_bag_item 'sites', site_id
+
   if site['ssl']
     ['ssl', 'ssl/keys', 'ssl/certs'].each do |new_path|
       directory "#{site['root']}/#{new_path}" do
@@ -14,10 +18,10 @@ node['sites'].each do |name, site|
   end
 
   if site['ssl']
-    ssl_certificate name do
+    ssl_certificate site_id do
       namespace site
-      key_path File.join(site['root'], 'ssl', 'keys', "#{name}.key")
-      cert_path File.join(site['root'], 'ssl', 'certs', "#{name}.pem")
+      key_path File.join(site['root'], 'ssl', 'keys', "#{site_id}.key")
+      cert_path File.join(site['root'], 'ssl', 'certs', "#{site_id}.pem")
       notifies :restart, 'service[nginx]' unless node['nginx']['supervisor']
     end
   end

@@ -1,20 +1,23 @@
-node['sites'].each do |name, site|
-  node['site_defaults'].each do |key, default_value|
-    node.set_unless['sites'][name][key] = default_value
-  end
+data_bag('sites').each do |site_id|
+  next unless node['sites'].include? site_id
+  site = data_bag_item 'sites', site_id
 
-  node.set_unless['sites'][name]['root'] = "/sites/#{name}"
-  node.set_unless['sites'][name]['server_names'] = [name]
+  site['owner'] = node['site_defaults']['owner'] unless site.has_key? 'owner'
+  site['web_root'] = node['site_defaults']['web_root'] unless site.has_key? 'web_root'
+  site['php'] = node['site_defaults']['php'] unless site.has_key? 'php'
+  site['wordpress'] = node['site_defaults']['wordpress'] unless site.has_key? 'wordpress'
+  site.save unless Chef::Config[:solo]
 end
-node.save unless Chef::Config[:solo]
 
 include_recipe 'website::user'
 include_recipe 'nginx::default'
 
-node['sites'].each do |name, site|
+data_bag('sites').each do |site_id|
+  next unless node['sites'].include? site_id
+  site = data_bag_item 'sites', site_id
 
   if site['git']
-    git "git_sync_#{name}" do
+    git "git_sync_#{site_id}" do
       destination site['root']
       repository site['git']['repository']
       checkout_branch site['git']['branch']
@@ -46,11 +49,11 @@ node['sites'].each do |name, site|
   include_recipe 'website::ssl' if site['ssl']
   include_recipe 'website::wordpress' if site['wordpress']
 
-  template "/etc/nginx/sites/#{name}.conf" do
+  template "/etc/nginx/sites/#{site_id}.conf" do
     mode '0644'
     source 'nginx/site.conf.erb'
     variables(
-      name: name,
+      site_id: site_id,
       site: site
     )
     notifies :reload, 'service[nginx]' unless node['nginx']['supervisor']

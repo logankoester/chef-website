@@ -1,4 +1,8 @@
-node['sites'].each do |name, site|
+sites = data_bag 'sites'
+sites.each do |site_id|
+  next unless node['sites'].include? site_id
+  site = data_bag_item 'sites', site_id
+
   username = site['owner']
 
   user username do
@@ -26,7 +30,7 @@ node['sites'].each do |name, site|
   end
 
   if site['git'] && site['git']['repository'] && site['deploy_key'] && site['deploy_key']['credentials']
-    deploy_key "#{name}_deploy_key" do
+    deploy_key "#{site_id}_deploy_key" do
       label 'deploy_key'
       provider Chef::Provider::DeployKeyGithub
       path "/home/#{username}/.ssh"

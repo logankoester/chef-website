@@ -7,13 +7,18 @@ describe 'website::default' do
     stub_data_bag('users').and_return(['site_admin', 'another_user'])
     stub_data_bag_item_from_file 'users', 'site_admin'
     stub_data_bag_item_from_file 'users', 'another_user'
+
+    stub_data_bag('sites').and_return(['php_site', 'ssl_site', 'wordpress_site'])
+    stub_data_bag_item_from_file 'sites', 'php_site'
+    stub_data_bag_item_from_file 'sites', 'ssl_site'
+    stub_data_bag_item_from_file 'sites', 'wordpress_site'
   end
 
   context 'with no sites' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         set_attributes_for node
-        node.set['sites'] = {}
+        node.set['sites'] = []
       end.converge(described_recipe)
     end
 
@@ -30,14 +35,7 @@ describe 'website::default' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         set_attributes_for node
-        node.set['sites'] = {
-          php_site: {
-            owner: 'php_site_owner',
-            root: '/sites/php_site',
-            server_names: ['php_site.example'],
-            php: true
-          }
-        }
+        node.set['sites'] = ['php_site']
       end.converge(described_recipe)
     end
 
@@ -70,16 +68,7 @@ describe 'website::default' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         set_attributes_for node
-        node.set['sites'] = {
-          ssl_site: {
-            owner: 'ssl_site_owner',
-            root: '/sites/ssl_site',
-            server_names: ['ssl_site.example'],
-            ssl: {
-              common_name: 'ssl_site.example'
-            }
-          }
-        }
+        node.set['sites'] = ['ssl_site']
       end.converge(described_recipe)
     end
 
@@ -102,26 +91,7 @@ describe 'website::default' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         set_attributes_for node
-        node.set['sites'] = {
-          wordpress_site: {
-            owner: 'wordpress_site_owner',
-            root: '/sites/wordpress_site',
-            web_root: 'www',
-            server_names: ['wordpress_site.example'],
-            php: true,
-            wordpress: {
-              db: {
-                name: 'default',
-                user: 'default',
-                pass: 'default',
-                host: 'localhost'
-              },
-              allow_multisite: false,
-              wp_siteurl: 'http://wordpress_site.example/',
-              wp_home: 'http://wordpress_site..example/'
-            }
-          }
-        }
+        node.set['sites'] = ['wordpress_site']
       end.converge(described_recipe)
     end
 

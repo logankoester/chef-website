@@ -1,4 +1,4 @@
-default['sites'] = {}
+default['sites'] = []
 
 # Override these defaults to suit your preferences.
 #

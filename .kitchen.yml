@@ -24,26 +24,9 @@ suites:
     run_list:
       - 'recipe[supervisor]'
       - 'recipe[website]'
+    data_bags_path: 'test/integration/data_bags'
     attributes:
       nginx:
         supervisor: true
       sites:
-        'default.example':
-          server_names:
-            - 'default.example'
-            - 'www.default.example'
-          owner: 'default'
-          root: '/sites/default.example'
-          php: true
-          wordpress:
-            db:
-              name: 'default'
-              user: 'default'
-              pass: 'default'
-              host: 'localhost'
-              prefix: 'wp_'
-            allow_multisite: false
-            wp_siteurl: 'https://default.example/'
-            wp_home: 'https://default.example/'
-          ssl:
-            common_name: 'default.example'
+        - 'default'

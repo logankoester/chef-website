@@ -1,0 +1,8 @@
+{
+  "id": "php_site",
+  "owner": "php_site_owner",
+  "root": "/sites/php_site",
+  "web_root": "www",
+  "server_names": ["php_site.example"],
+  "php": true
+}

@@ -1,0 +1,26 @@
+{
+  "id": "default",
+  "server_names": [
+    "default.example",
+    "www.default.example"
+  ],
+  "owner": "default",
+  "root": "/sites/default",
+  "web_root": "www",
+  "php": true,
+  "wordpress": {
+    "db": {
+      "name": "default",
+      "user": "default",
+      "pass": "default",
+      "host": "localhost",
+      "prefix": "wp_"
+    },
+    "allow_multisite": false,
+    "wp_siteurl": "https://default.example/",
+    "wp_home": "https://default.example/"
+  },
+  "ssl": {
+    "common_name": "default.example"
+  }
+}

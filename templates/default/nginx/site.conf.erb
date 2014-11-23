@@ -5,12 +5,12 @@ server {
   root <%= File.join(@site['root'], @site['web_root']) %>;
 
 <%= render 'nginx/ssl.conf.erb', :variables => {
-  cert_path: File.join(@site['root'], 'ssl', 'certs', "#{@name}.pem"),
-  key_path: File.join(@site['root'], 'ssl', 'keys', "#{@name}.key")
+  cert_path: File.join(@site['root'], 'ssl', 'certs', "#{@site_id}.pem"),
+  key_path: File.join(@site['root'], 'ssl', 'keys', "#{@site_id}.key")
 } %>
 
 <%= render 'nginx/php.conf.erb', :variables => {
-  name: @name,
+  site_id: @site_id,
   site: @site
 } if @site['php'] %>
 
@@ -24,7 +24,7 @@ server {
   root <%= File.join(@site['root'], @site['web_root']) %>;
 
 <%= render 'nginx/php.conf.erb', :variables => {
-  name: @name,
+  site_id: @site_id,
   site: @site
 } if @site['php'] %>
 
