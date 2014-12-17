@@ -5,7 +5,7 @@
     "www.default.example"
   ],
   "owner": "default",
-  "root": "/sites/default",
+  "root": "/srv/http/default",
   "web_root": "www",
   "php": true,
   "wordpress": {

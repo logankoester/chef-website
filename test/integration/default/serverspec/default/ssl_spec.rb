@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 [
-  file('/sites/default/ssl'),
-  file('/sites/default/ssl/keys'),
-  file('/sites/default/ssl/certs')
+  file('/srv/http/default/ssl'),
+  file('/srv/http/default/ssl/keys'),
+  file('/srv/http/default/ssl/certs')
 ].each do |path|
   describe path do
     it { should be_directory }
@@ -13,8 +13,8 @@ require 'spec_helper'
 end
 
 [
-  file('/sites/default/ssl/keys/default.key'),
-  file('/sites/default/ssl/certs/default.pem')
+  file('/srv/http/default/ssl/keys/default.key'),
+  file('/srv/http/default/ssl/certs/default.pem')
 ].each do |path|
   describe path do
     it { should be_file }

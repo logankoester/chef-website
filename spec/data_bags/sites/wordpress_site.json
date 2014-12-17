@@ -1,7 +1,7 @@
 {
   "id": "wordpress_site",
   "owner": "wordpress_site_owner",
-  "root": "/sites/wordpress_site",
+  "root": "/srv/http/wordpress_site",
   "web_root": "www",
   "server_names": ["wordpress_site.example"],
   "php": true,

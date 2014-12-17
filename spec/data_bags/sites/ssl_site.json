@@ -1,7 +1,7 @@
 {
   "id": "ssl_site",
   "owner": "ssl_site_owner",
-  "root": "/sites/ssl_site",
+  "root": "/srv/http/ssl_site",
   "web_root": "www",
   "server_names": ["ssl_site.example"],
   "ssl": {

@@ -53,7 +53,7 @@ describe 'website::default' do
     end
 
     it 'should create the site root' do
-      expect(chef_run).to create_directory('/sites/php_site').with(
+      expect(chef_run).to create_directory('/srv/http/php_site').with(
         user: 'php_site_owner',
         group: 'http'
       )
@@ -77,8 +77,8 @@ describe 'website::default' do
     end
 
     it 'should create the ssl directories' do
-      expect(chef_run).to create_directory '/sites/ssl_site/ssl/keys'
-      expect(chef_run).to create_directory '/sites/ssl_site/ssl/certs'
+      expect(chef_run).to create_directory '/srv/http/ssl_site/ssl/keys'
+      expect(chef_run).to create_directory '/srv/http/ssl_site/ssl/certs'
     end
 
     it 'should render the nginx/site.conf.erb template with SSL configured' do
@@ -100,7 +100,7 @@ describe 'website::default' do
     end
 
     it 'should render the wordpress/wp-config.php.erb template' do
-      expect(chef_run).to render_file('/sites/wordpress_site/www/wp-config.php')
+      expect(chef_run).to render_file('/srv/http/wordpress_site/www/wp-config.php')
     end
   end
 
