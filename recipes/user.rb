@@ -29,13 +29,13 @@ sites.each do |site_id|
     action :create
   end
 
-  if site['git'] && site['git']['repository'] && site['deploy_key'] && site['deploy_key']['credentials']
+  if site['deploy_key'] && site['deploy_key']['credentials'] && site['deploy_key']['repo']
     deploy_key "#{site_id}_deploy_key" do
-      label 'deploy_key'
+      label "#{username}_deploy_key"
       provider Chef::Provider::DeployKeyGithub
       path "/home/#{username}/.ssh"
-      credentials site['deploy_key']['credentials']
-      repo site['git']['repository']
+      credentials({ :token => site['deploy_key']['credentials']['token'] })
+      repo site['deploy_key']['repo']
       owner username
       group username
       mode '0700'
