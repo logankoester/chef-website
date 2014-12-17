@@ -90,9 +90,9 @@ If you specify an `owner`, that user will be created if missing and added to the
 
 ### Deploy keys
 
-If you want Chef to deploy your site from a private repo, you authorize it by setting the `deploy_key` object.
+If you want Chef to deploy your site from a private repo, you must authorize it by setting the `deploy_key` object.
 
-To obtain a token, you will need to register an application at `https://github.com/settings/applications` (or the equivilant page for your Github Organization), and then follow the [OAuth Web Application Flow](https://developer.github.com/v3/oauth/#web-application-flow) (easiest a tool like [Postman](http://www.getpostman.com/)).
+To obtain a token, you will need to register an application at `https://github.com/settings/applications` (or the equivilant page for your Github Organization), and then follow the [OAuth Web Application Flow](https://developer.github.com/v3/oauth/#web-application-flow) (easiest with an API testing tool like [Postman](http://www.getpostman.com/)).
 
 ```json
 "deploy_key": {
