@@ -3,6 +3,9 @@ driver:
   name: docker
   use_sudo: false
 
+busser:
+  ruby_bindir: '/usr/bin'
+
 provisioner:
   name: chef_zero
 
@@ -14,7 +17,8 @@ platforms:
       disable_upstart: true
       require_chef_omnibus: false
       provision_command:
-        - pacman -S --noconfirm --needed supervisor
+        - pacman -S --noconfirm --needed supervisor git
+        - rm /etc/gemrc
       run_command: 'sh -c "/usr/sbin/sshd -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes && /usr/sbin/supervisord -c /etc/supervisord.conf -n"'
 
 suites:
