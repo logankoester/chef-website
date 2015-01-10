@@ -11,5 +11,5 @@ gem 'serverspec'
 
 gem 'guard'
 gem 'guard-rspec'
-gem 'guard-kitchen', github: 'test-kitchen/guard-kitchen', branch: 'master'
+gem 'guard-kitchen', github: 'logankoester/guard-kitchen', branch: 'master'
 gem 'guard-foodcritic'
