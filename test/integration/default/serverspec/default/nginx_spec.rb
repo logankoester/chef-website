@@ -23,5 +23,5 @@ describe file('/etc/nginx/sites/default.conf') do
   it { should be_file }
   its(:content) { should match /server_name default\.example www\.default\.example;/ }
   its(:content) { should match /listen 80;/ }
-  its(:content) { should match /root \/sites\/default\/www;/ }
+  its(:content) { should match /root \/srv\/http\/default\/www;/ }
 end

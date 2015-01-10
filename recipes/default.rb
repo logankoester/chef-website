@@ -16,6 +16,12 @@ data_bag('sites').each do |site_id|
   next unless node['sites'].include? site_id
   site = data_bag_item 'sites', site_id
 
+  directory File.absolute_path(File.join(site['root'], '..')) do
+    group 'http'
+    mode '0775'
+    action :create
+  end
+
   if site['git']
     git "git_sync_#{site_id}" do
       destination site['root']
