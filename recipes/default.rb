@@ -26,7 +26,7 @@ data_bag('sites').each do |site_id|
     git "git_sync_#{site_id}" do
       destination site['root']
       repository site['git']['repository']
-      checkout_branch site['git']['branch']
+      revision site['git']['branch']
       enable_submodules true
       user site['owner']
       group 'http'
