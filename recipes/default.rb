@@ -12,6 +12,10 @@ end
 include_recipe 'website::user'
 include_recipe 'nginx::default'
 
+php_site_detected = false
+ssl_site_detected = false
+wordpress_site_detected = false
+
 data_bag('sites').each do |site_id|
   next unless node['sites'].include? site_id
   site = data_bag_item 'sites', site_id
@@ -51,10 +55,6 @@ data_bag('sites').each do |site_id|
     recursive true
   end
 
-  include_recipe 'nginx::php_fpm' if site['php']
-  include_recipe 'website::ssl' if site['ssl']
-  include_recipe 'website::wordpress' if site['wordpress']
-
   template "/etc/nginx/sites/#{site_id}.conf" do
     mode '0644'
     source 'nginx/site.conf.erb'
@@ -64,4 +64,12 @@ data_bag('sites').each do |site_id|
     )
     notifies :reload, 'service[nginx]' unless node['nginx']['supervisor']
   end
+
+  php_site_detected = true if site['php']
+  ssl_site_detected = true if site['ssl']
+  wordpress_site_detected = true if site['wordpress']
 end
+
+include_recipe 'nginx::php_fpm' if php_site_detected
+include_recipe 'website::ssl' if ssl_site_detected
+include_recipe 'website::wordpress' if wordpress_site_detected

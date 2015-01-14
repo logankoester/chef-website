@@ -34,3 +34,4 @@ suites:
         supervisor: true
       sites:
         - 'default'
+        - 'secondary'
