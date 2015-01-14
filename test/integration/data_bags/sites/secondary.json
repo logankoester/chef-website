@@ -1,0 +1,26 @@
+{
+  "id": "secondary",
+  "server_names": [
+    "secondary.example",
+    "www.secondary.example"
+  ],
+  "owner": "default",
+  "root": "/srv/http/secondary",
+  "web_root": "www",
+  "php": true,
+  "wordpress": {
+    "db": {
+      "name": "secondary",
+      "user": "secondary",
+      "pass": "default",
+      "host": "localhost",
+      "prefix": "wp_"
+    },
+    "allow_multisite": false,
+    "wp_siteurl": "https://secondary.example/",
+    "wp_home": "https://secondary.example/"
+  },
+  "ssl": {
+    "common_name": "secondary.example"
+  }
+}
