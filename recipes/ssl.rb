@@ -22,9 +22,8 @@ sites.each do |site_id|
 
     ssl_certificate site_id do
       namespace node[ns]
-      key_path File.join(site['root'], 'ssl', 'keys', "#{site_id}.key")
-      cert_path File.join(site['root'], 'ssl', 'certs', "#{site_id}.pem")
-      chain_combined_path File.join(site['root'], 'ssl', 'certs', "#{site_id}.chained.pem")
+      cert_dir File.join(site['root'], 'ssl', 'certs')
+      key_dir File.join(site['root'], 'ssl', 'keys')
       notifies :restart, 'service[nginx]' unless node['nginx']['supervisor']
     end
   end
