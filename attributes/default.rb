@@ -16,3 +16,12 @@ default['site_defaults']['php'] = false
 
 # Is this a Wordpress site?
 default['site_defaults']['wordpress'] = false
+
+# Any extra system packages this site might need
+default['site_defaults']['packages']['install'] = []
+
+# Any system packages this site should remove
+default['site_defaults']['packages']['remove'] = []
+
+# Any AUR packages this site should build and install
+default['site_defaults']['packages']['aur'] = []

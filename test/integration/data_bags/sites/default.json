@@ -22,5 +22,10 @@
   },
   "ssl": {
     "common_name": "default.example"
+  },
+  "packages": {
+    "install": ["sl"],
+    "remove": ["usbutils"],
+    "build": ["aurvote"]
   }
 }

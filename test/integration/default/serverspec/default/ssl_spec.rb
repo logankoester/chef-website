@@ -9,7 +9,7 @@ cert_path = File.join(ssl_dir, 'certs', 'default.pem')
 describe file('/etc/nginx/sites/default.conf') do
   its(:content) { should match /listen 443;/ }
   its(:content) { should match /ssl on;/ }
-  its(:content) { should match /ssl_certificate .*default\.chained\.pem;/ }
+  its(:content) { should match /ssl_certificate .*default\.pem\.chained\.pem;/ }
   its(:content) { should match /ssl_certificate_key .*default\.key;/ }
 end
 
