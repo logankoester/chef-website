@@ -5,7 +5,7 @@ server {
   root <%= File.join(@site['root'], @site['web_root']) %>;
 
 <%= render 'nginx/ssl.conf.erb', :variables => {
-  cert_path: File.join(@site['root'], 'ssl', 'certs', "#{@site_id}.pem"),
+  cert_path: File.join(@site['root'], 'ssl', 'certs', "#{@site_id}.chained.pem"),
   key_path: File.join(@site['root'], 'ssl', 'keys', "#{@site_id}.key")
 } %>
 

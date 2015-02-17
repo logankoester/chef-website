@@ -24,6 +24,7 @@ sites.each do |site_id|
       namespace node[ns]
       key_path File.join(site['root'], 'ssl', 'keys', "#{site_id}.key")
       cert_path File.join(site['root'], 'ssl', 'certs', "#{site_id}.pem")
+      chain_combined_path File.join(site['root'], 'ssl', 'certs', "#{site_id}.chained.pem")
       notifies :restart, 'service[nginx]' unless node['nginx']['supervisor']
     end
   end

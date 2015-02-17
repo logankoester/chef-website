@@ -41,3 +41,7 @@ end
 describe command("#{fingerprint_command} /srv/http/secondary/ssl/certs/secondary.pem") do
   its(:stdout) { should match /SHA1 Fingerprint=90:35:5E:38:92:8B:5C:4A:75:24:01:14:44:D6:A3:45:DB:00:34:C1/ }
 end
+
+describe command("#{fingerprint_command} /srv/http/secondary/ssl/certs/secondary.chained.pem") do
+  its(:stdout) { should match /SHA1 Fingerprint=90:35:5E:38:92:8B:5C:4A:75:24:01:14:44:D6:A3:45:DB:00:34:C1/ }
+end
