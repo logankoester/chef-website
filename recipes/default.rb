@@ -50,6 +50,8 @@ data_bag('sites').each do |site_id|
   end
 
   if site['git']
+    package('git') { action :install }
+
     git "git_sync_#{site_id}" do
       destination site['root']
       repository site['git']['repository']
