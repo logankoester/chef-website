@@ -26,6 +26,6 @@
   "packages": {
     "install": ["sl"],
     "remove": ["usbutils"],
-    "build": ["aurvote"]
+    "aur": ["aurvote"]
   }
 }
