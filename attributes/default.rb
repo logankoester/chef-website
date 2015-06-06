@@ -11,6 +11,14 @@ default['site_defaults']['owner'] = 'http'
 # Relative path from site.root where files should be served
 default['site_defaults']['web_root'] = 'www'
 
+# Set an optional proxy_pass string to create a reverse
+# proxy instead, omitting the web_root
+# eg: proxy_pass http://localhost:8000;
+default['site_defaults']['proxy_pass'] = false
+
+# Enable to redirect insecure http traffic to https
+default['site_defaults']['redirect_insecure'] = false
+
 # Does this site need PHP?
 default['site_defaults']['php'] = false
 

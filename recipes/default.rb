@@ -4,9 +4,12 @@ data_bag('sites').each do |site_id|
 
   site['owner'] = node['site_defaults']['owner'] unless site.has_key? 'owner'
   site['web_root'] = node['site_defaults']['web_root'] unless site.has_key? 'web_root'
+  site['proxy_pass'] = node['site_defaults']['proxy_pass'] unless site.has_key? 'proxy_pass'
+  site['redirect_insecure'] = node['site_defaults']['redirect_insecure'] unless site.has_key? 'redirect_insecure'
   site['php'] = node['site_defaults']['php'] unless site.has_key? 'php'
   site['packages'] = node['site_defaults']['packages'] unless site.has_key? 'packages'
   site['wordpress'] = node['site_defaults']['wordpress'] unless site.has_key? 'wordpress'
+  site['aur'] = node['site_defaults']['aur'] unless site.has_key? 'aur'
   site.save unless Chef::Config[:solo]
 end
 

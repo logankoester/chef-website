@@ -68,6 +68,16 @@ If any sites have a truthy `php` property, then `php-fpm` will be installed and 
 }
 ```
 
+### Reverse proxy
+
+If you want a reverse proxy, you can create a site with the `proxy_pass` string set instead of a web root.
+
+```json
+{ 
+  "proxy_pass": "http://localhost:8000"
+}
+```
+
 ### SSL certificates
 
 If a site has the optional `ssl` attribute, then an SSL certificate will be created and `nginx` will be configured to listen on port **443** in addition to port **80**.
@@ -83,6 +93,17 @@ If a site has the optional `ssl` attribute, then an SSL certificate will be crea
 You can create a self-signed certificate (default), or read a custom one from attributes, data bags or chef-vaults.
 
 See the [ssl_certificate](https://supermarket.getchef.com/cookbooks/ssl_certificate) cookbook for details.
+
+### Redirect insecure
+
+If the optional `redirect_insecure` attribute is set to `true`, then the site will redirect all http traffic to https.
+
+
+```json
+{ 
+  "redirect_insecure": true
+}
+```
 
 ### User accounts
 
