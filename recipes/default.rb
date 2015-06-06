@@ -75,12 +75,14 @@ data_bag('sites').each do |site_id|
     recursive true
   end
 
-  directory File.join(site['root'], site['web_root']) do
-    owner site['owner']
-    group 'http'
-    mode '0771'
-    action :create
-    recursive true
+  if site['web_root']
+    directory File.join(site['root'], site['web_root']) do
+      owner site['owner']
+      group 'http'
+      mode '0771'
+      action :create
+      recursive true
+    end
   end
 
   template "/etc/nginx/sites/#{site_id}.conf" do
