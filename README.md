@@ -109,6 +109,8 @@ If the optional `redirect_insecure` attribute is set to `true`, then the site wi
 
 If you specify an `owner`, that user will be created if missing and added to the `http` group. If no owner is specified, a default `http` user will be used. A home directory will be created at `/home/#{owner}`.
 
+If you prefer to skip the `user` recipe altogether for a site, enable the `{ "skip_user": true }` option.
+
 ### Deploy keys
 
 If you want Chef to deploy your site from a private repo, you must authorize it by setting the `deploy_key` object.

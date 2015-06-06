@@ -33,3 +33,6 @@ default['site_defaults']['packages']['remove'] = []
 
 # Any AUR packages this site should build and install
 default['site_defaults']['packages']['aur'] = []
+
+# Skip the 'user' recipe for this site.
+default['site_defaults']['skip_user'] = false

@@ -10,6 +10,7 @@ data_bag('sites').each do |site_id|
   site['packages'] = node['site_defaults']['packages'] unless site.has_key? 'packages'
   site['wordpress'] = node['site_defaults']['wordpress'] unless site.has_key? 'wordpress'
   site['aur'] = node['site_defaults']['aur'] unless site.has_key? 'aur'
+  site['skip_user'] = node['site_defaults']['skip_user'] unless site.has_key? 'skip_user'
   site.save unless Chef::Config[:solo]
 end
 

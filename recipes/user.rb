@@ -2,6 +2,7 @@ sites = data_bag 'sites'
 sites.each do |site_id|
   next unless node['sites'].include? site_id
   site = data_bag_item 'sites', site_id
+  next if site['skip_user']
 
   username = site['owner']
 
