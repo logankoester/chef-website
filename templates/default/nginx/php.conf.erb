@@ -1,4 +1,4 @@
-﻿  location ~ \.php$ {
+  location ~ \.php$ {
     root <%= File.join(@site['root'], @site['web_root']) %>;
     try_files      $uri = 404; 
     fastcgi_pass   unix:/run/php-fpm/php-fpm.sock;

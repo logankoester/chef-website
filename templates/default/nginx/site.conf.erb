@@ -1,4 +1,4 @@
-﻿<% if @site['ssl'] %>
+<% if @site['ssl'] %>
 server {
   listen 443;
   server_name <%= @site['server_names'].join(' ') %>;
