@@ -3,7 +3,7 @@ include_recipe 'pacman'
 # Install wp-cli from AUR (http://wp-cli.org/ )
 package('zip') { action :install }
 package('unzip') { action :install }
-package('php-composer') { action :install }
+package('composer') { action :install }
 
 ruby_block "Disable phar.readonly (wp-cli requires to be off)" do
   php_conf = '/etc/php/php.ini'
