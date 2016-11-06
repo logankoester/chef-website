@@ -15,7 +15,7 @@ data_bag('sites').each do |site_id|
     acme_certificate config['domain'] do
       crt      "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.crt"
       key      "/srv/http/#{config['domain']}/ssl/keys/#{config['domain']}.key"
-      chain    "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.pem.chained.pem"
+      fullchain    "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.pem.chained.pem"
       method   'http'
       wwwroot  "/srv/http/#{config['domain']}/#{site['web_root']}"
       notifies :restart, 'service[nginx]'
