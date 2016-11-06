@@ -18,7 +18,7 @@ data_bag('sites').each do |site_id|
       fullchain    "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.pem.chained.pem"
       method   'http'
       wwwroot  "/srv/http/#{config['domain']}/#{site['web_root']}"
-      notifies :restart, 'service[nginx]'
+      notifies :reload, 'service[nginx]'
       alt_names config['alt_domains']
     end
   end
