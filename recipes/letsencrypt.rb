@@ -13,12 +13,12 @@ data_bag('sites').each do |site_id|
 
     # Get and auto-renew the certificate from Let's Encrypt
     acme_certificate config['domain'] do
-      crt      "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.crt"
+      fullchain      "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.crt"
       key      "/srv/http/#{config['domain']}/ssl/keys/#{config['domain']}.key"
-      fullchain    "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.pem.chained.pem"
+      chain    "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.pem.chained.pem"
       method   'http'
       wwwroot  "/srv/http/#{config['domain']}/#{site['web_root']}"
-      notifies :reload, 'service[nginx]'
+      notifies :restart, 'service[nginx]'
       alt_names config['alt_domains']
     end
   end
