@@ -12,7 +12,7 @@ data_bag('sites').each do |site_id|
     node.set['acme']['contact'] = [ "mailto:#{config['email']}" ]
 
     # Get and auto-renew the certificate from Let's Encrypt
-    acme_certificate "#{site}" do
+    acme_certificate config['domain'] do
       crt      "/srv/http/#{config['domain']}/ssl/certs/#{config['domain']}.crt"
       key      "/srv/http/#{config['domain']}/ssl/keys/#{config['domain']}.key"
       chain    "/srv/http/#{site}/ssl/certs/#{site}.pem.chained.pem"
