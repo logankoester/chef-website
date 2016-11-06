@@ -8,3 +8,4 @@ cookbook 'openssl', github: 'opscode-cookbooks/openssl', branch: 'master'
 cookbook 'deploy_key', github: 'cassianoleal/cookbook-deploy_key', branch: 'master'
 
 cookbook 'supervisor', github: 'logankoester/supervisor', branch: 'master'
+cookbook 'acme'

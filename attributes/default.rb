@@ -25,6 +25,9 @@ default['site_defaults']['php'] = false
 # Is this a Wordpress site?
 default['site_defaults']['wordpress'] = false
 
+# Generate a LetsEncrypt certificate?
+default['site_defaults']['letsencrypt'] = false
+
 # Any extra system packages this site might need
 default['site_defaults']['packages']['install'] = []
 

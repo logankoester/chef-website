@@ -11,6 +11,7 @@ data_bag('sites').each do |site_id|
   site['wordpress'] = node['site_defaults']['wordpress'] unless site.has_key? 'wordpress'
   site['aur'] = node['site_defaults']['aur'] unless site.has_key? 'aur'
   site['skip_user'] = node['site_defaults']['skip_user'] unless site.has_key? 'skip_user'
+  site['letsencrypt'] = node['site_defaults']['letsencrypt'] unless site.has_key? 'letsencrypt'
   site.save unless Chef::Config[:solo]
 end
 
@@ -20,6 +21,7 @@ include_recipe 'nginx::default'
 php_site_detected = false
 ssl_site_detected = false
 wordpress_site_detected = false
+letsencrypt_detected = false
 
 data_bag('sites').each do |site_id|
   next unless node['sites'].include? site_id
@@ -98,9 +100,11 @@ data_bag('sites').each do |site_id|
 
   php_site_detected = true if site['php']
   ssl_site_detected = true if site['ssl']
+  letsencrypt_detected = true if site['letsencrypt']
   wordpress_site_detected = true if site['wordpress']
 end
 
 include_recipe 'nginx::php_fpm' if php_site_detected
 include_recipe 'website::ssl' if ssl_site_detected
 include_recipe 'website::wordpress' if wordpress_site_detected
+include_recipe 'website::letsencrypt' if letsencrypt_detected

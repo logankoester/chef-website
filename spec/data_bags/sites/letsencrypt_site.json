@@ -1,0 +1,12 @@
+{
+  "id": "letsencrypt_site",
+  "owner": "letsencrypt_site_owner",
+  "root": "/srv/http/letsencrypt_site",
+  "web_root": "www",
+  "server_names": ["letsencrypt_site.example"],
+  "letsencrypt": {
+    "domain": "letsencrypt_site.example",
+    "alt_domains": ["www.letsencrypt_site.example"],
+    "email": "foo@example.com"
+  }
+}
