@@ -10,7 +10,8 @@ end
 
 describe file('/srv/http/default/www/wp-config.php') do
   it { should be_file }
-  its(:content) { should match /@package WordPress/ }
+  its(:content) { should match(/@package WordPress/) }
+  its(:content) { should match (/define\('EXTRA_CONSTANT', 'VALUE'\)/) }
 end
 
 describe file('/srv/http/secondary/www') do
@@ -19,5 +20,5 @@ end
 
 describe file('/srv/http/secondary/www/wp-config.php') do
   it { should be_file }
-  its(:content) { should match /@package WordPress/ }
+  its(:content) { should match(/@package WordPress/) }
 end

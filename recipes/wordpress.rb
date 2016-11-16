@@ -69,7 +69,8 @@ sites.each do |site_id|
         :lang             => wordpress['languages']['lang'],
         :allow_multisite  => wordpress['allow_multisite'],
         :wp_siteurl       => wordpress['wp_siteurl'],
-        :wp_home          => wordpress['wp_home']
+        :wp_home          => wordpress['wp_home'],
+        :extra            => wordpress['extra']
       )
       action :create
     end

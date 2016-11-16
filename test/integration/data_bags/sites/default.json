@@ -18,7 +18,10 @@
     },
     "allow_multisite": false,
     "wp_siteurl": "https://default.example/",
-    "wp_home": "https://default.example/"
+    "wp_home": "https://default.example/",
+    "extra": {
+      "EXTRA_CONSTANT": "VALUE"
+    }
   },
   "ssl": {
     "common_name": "default.example"
