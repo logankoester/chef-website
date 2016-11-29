@@ -15,6 +15,15 @@ ruby_block "Disable phar.readonly (wp-cli requires to be off)" do
   only_if { ::File.readlines(php_conf).grep(/phar.readonly = On/).any? }
 end
 
+ruby_block "Increase upload_max_filesize to 1024M" do
+  php_conf = '/etc/php/php.ini'
+  block do
+    edit = Chef::Util::FileEdit.new(php_conf)
+    edit.search_file_replace_line(/upload_max_filesize =/, 'upload_max_filesize = 1024M')
+    edit.write_file
+  end
+end
+
 pacman_aur('wp-cli'){ action [:build, :install] }
 
 sites = data_bag 'sites'
