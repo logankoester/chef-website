@@ -70,7 +70,7 @@ sites.each do |site_id|
     action :create_if_missing
     source 'ssh_config.erb'
     variables(
-      host: ssh_config_host
+      host: ssh_config_host,
       username: username
     )
     owner username
