@@ -65,7 +65,7 @@ sites.each do |site_id|
     source 'ssh_config.erb'
 
     if site['deploy_key']['provider'] == 'gitlab'
-      ssh_config_host = site['deploy_key']['provider']['provider_host']
+      ssh_config_host = site['deploy_key']['provider_host']
     else
       ssh_config_host = 'github.com'
     end
