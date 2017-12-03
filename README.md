@@ -146,7 +146,7 @@ If you're using GitLab rather than Github, you can specify that like this:
   "credentials": {
     "token": "GITLAB_TOKEN"
   },
-  "repo": "username/site-repo",
+  "repo": "project_id",
   "provider": "gitlab",
   "provider_host": "git.yoursite.example"
 }

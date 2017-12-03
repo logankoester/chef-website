@@ -60,15 +60,16 @@ sites.each do |site_id|
     mode '0700'
   end
 
-  if site['deploy_key']['provider'] == 'gitlab'
-    ssh_config_host = site['deploy_key']['provider']['provider_host']
-  else
-    ssh_config_host = 'github.com'
-  end
-
   template File.join('/home', username, '.ssh', 'config') do
     action :create_if_missing
     source 'ssh_config.erb'
+
+    if site['deploy_key']['provider'] == 'gitlab'
+      ssh_config_host = site['deploy_key']['provider']['provider_host']
+    else
+      ssh_config_host = 'github.com'
+    end
+
     variables(
       host: ssh_config_host,
       username: username

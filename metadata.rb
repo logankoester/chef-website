@@ -4,7 +4,7 @@ maintainer_email 'logan@logankoester.com'
 license          'MIT'
 description      'Install and configure sites for a webserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.6.1'
+version          '0.6.2'
 supports 'arch'
 
 depends 'nginx'
