@@ -33,7 +33,14 @@ sites.each do |site_id|
   if site['deploy_key'] && site['deploy_key']['credentials'] && site['deploy_key']['repo']
     deploy_key "#{site_id}_deploy_key" do
       label "#{username}_deploy_key"
-      provider Chef::Provider::DeployKeyGithub
+
+      if site['deploy_key']['provider'] == 'gitlab'
+        provider Chef::Provider::DeployKeyGitlab
+        api_url 'https://' + site['deploy_key']['provider_host']
+      else
+        provider Chef::Provider::DeployKeyGithub
+      end
+
       path "/home/#{username}/.ssh"
       credentials({ :token => site['deploy_key']['credentials']['token'] })
       repo site['deploy_key']['repo']
@@ -53,10 +60,19 @@ sites.each do |site_id|
     mode '0700'
   end
 
+  if site['deploy_key']['provider'] == 'gitlab'
+    ssh_config_host = site['deploy_key']['provider']['provider_host']
+  else
+    ssh_config_host = 'github.com'
+  end
+
   template File.join('/home', username, '.ssh', 'config') do
     action :create_if_missing
     source 'ssh_config.erb'
-    variables(username: username)
+    variables(
+      host: ssh_config_host
+      username: username
+    )
     owner username
     group username
     mode '0644'

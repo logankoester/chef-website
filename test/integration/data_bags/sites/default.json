@@ -30,5 +30,13 @@
     "install": ["sl"],
     "remove": ["usbutils"],
     "aur": ["aurvote"]
+  },
+  "deploy_key": {
+    "credentials": {
+      "token": "deploy-token"
+    },
+    "repo": "example/default",
+    "provider": "gitlab",
+    "provider_host": "git.example"
   }
 }

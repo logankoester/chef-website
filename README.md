@@ -139,6 +139,19 @@ See the [deploy_key](https://supermarket.getchef.com/cookbooks/deploy_key) cookb
 
 > Note that if you want to use different deploy keys for different sites you must separate them by putting those sites under a different owner).
 
+If you're using GitLab rather than Github, you can specify that like this:
+
+```json
+"deploy_key": {
+  "credentials": {
+    "token": "GITLAB_TOKEN"
+  },
+  "repo": "username/site-repo",
+  "provider": "gitlab",
+  "provider_host": "git.yoursite.example"
+}
+```
+
 ## Running the tests
 
 This cookbook uses the [Foodcritic](http://www.foodcritic.io/) linter, [ChefSpec](http://sethvargo.github.io/chefspec/) for unit testing, and [ServerSpec](http://serverspec.org/) for integration testing via [Test Kitchen](http://kitchen.ci/) with the [kitchen-docker](https://github.com/portertech/kitchen-docker) driver.
@@ -154,4 +167,4 @@ This will run all of the tests once. While developing, run `bundle exec guard st
 
 ## Author
 
-Copyright (c) 2014-2016 [Logan Koester](http://logankoester.com). Released under the MIT license. See `LICENSE` for details.
+Copyright (c) 2014-2018 [Logan Koester](http://logankoester.com). Released under the MIT license. See `LICENSE` for details.

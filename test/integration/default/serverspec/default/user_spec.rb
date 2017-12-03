@@ -22,6 +22,9 @@ describe file('/home/default/.ssh/config') do
   it { should be_file }
   it { should be_owned_by 'default' }
   it { should be_grouped_into 'default' }
+  it { should contain 'Host git.example' }
+  it { should contain 'User git' }
+  it { should contain 'Hostname git.example' }
 end
 
 describe file('/home/default/.ssh/deploy_wrapper.sh') do
