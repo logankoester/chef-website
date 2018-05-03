@@ -37,7 +37,7 @@ data_bag('sites').each do |site_id|
     if aur_packages = site['packages']['aur']
       include_recipe 'pacman'
       aur_packages.each do |pkg|
-        pacman_aur(pkg) { action [:build, :install] }
+        pacman_aur(pkg) { action [:install] }
       end
     end
 
