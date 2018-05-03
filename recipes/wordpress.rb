@@ -24,7 +24,7 @@ ruby_block "Increase upload_max_filesize to 1024M" do
   end
 end
 
-pacman_aur('wp-cli'){ action [:build, :install] }
+pacman_aur('wp-cli'){ action :install }
 
 sites = data_bag 'sites'
 sites.each do |site_id|
