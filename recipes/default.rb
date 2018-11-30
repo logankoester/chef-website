@@ -12,11 +12,15 @@ data_bag('sites').each do |site_id|
   site['aur'] = node['site_defaults']['aur'] unless site.has_key? 'aur'
   site['skip_user'] = node['site_defaults']['skip_user'] unless site.has_key? 'skip_user'
   site['letsencrypt'] = node['site_defaults']['letsencrypt'] unless site.has_key? 'letsencrypt'
+  site['fastcgi_cache'] = node['site_defaults']['fastcgi_cache'] unless site.has_key? 'fastcgi_cache'
+  site['fastcgi_cache_zone'] = node['site_defaults']['fastcgi_cache_zone'] unless site.has_key? 'fastcgi_cache_zone'
+  site['fastcgi_cache_valid'] = node['site_defaults']['fastcgi_cache_valid'] unless site.has_key? 'fastcgi_cache_valid'
   site.save unless Chef::Config[:solo]
 end
 
 include_recipe 'website::user'
 include_recipe 'nginx::default'
+include_recipe 'website::fastcgi_cache'
 
 php_site_detected = false
 ssl_site_detected = false

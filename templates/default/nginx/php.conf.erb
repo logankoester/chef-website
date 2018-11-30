@@ -1,7 +1,19 @@
+<% if @site['wordpress'] %>
+  location / {
+    try_files $uri $uri/ /index.php?$args;
+  }    
+<% end %>
+
   location ~ \.php$ {
     root <%= File.join(@site['root'], @site['web_root']) %>;
     try_files      $uri = 404; 
     fastcgi_pass   unix:/run/php-fpm/php-fpm.sock;
     fastcgi_index  index.php;
+
+  <% if @site['fastcgi_cache'] %>
+    fastcgi_cache <%= @site['fastcgi_cache_zone'] %>;
+    fastcgi_cache_valid <%= @site['fastcgi_cache_valid'] %>;
+  <% end %>
+
     include        fastcgi.conf;
   }
