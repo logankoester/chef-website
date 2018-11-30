@@ -9,7 +9,7 @@ data_bag('sites').each do |site_id|
   if config = site['letsencrypt']
 
     # Set up contact information. Note the mailto: notation
-    node.set['acme']['contact'] = [ "mailto:#{config['email']}" ]
+    node.default['acme']['contact'] = [ "mailto:#{config['email']}" ]
 
     # Get and auto-renew the certificate from Let's Encrypt
     acme_certificate config['domain'] do
