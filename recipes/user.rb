@@ -35,10 +35,10 @@ sites.each do |site_id|
       label "#{username}_deploy_key"
 
       if site['deploy_key']['provider'] == 'gitlab'
-        provider Chef::Provider::DeployKeyGitlab
+        service 'gitlab'
         api_url 'https://' + site['deploy_key']['provider_host']
       else
-        provider Chef::Provider::DeployKeyGithub
+        service 'github'
       end
 
       path "/home/#{username}/.ssh"
