@@ -1,7 +1,7 @@
 include_recipe 'acme'
 
 # Real certificates please...
-node.set['acme']['endpoint'] = 'https://acme-v01.api.letsencrypt.org'
+node.default['acme']['endpoint'] = 'https://acme-v01.api.letsencrypt.org'
 
 data_bag('sites').each do |site_id|
   next unless node['sites'].include? site_id
