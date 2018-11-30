@@ -8,7 +8,7 @@ sites.each do |site_id|
 
   user username do
     home File.join('/home', username)
-    supports manage_home: true
+    manage_home true
   end
 
   group 'http' do
