@@ -46,7 +46,7 @@ default['site_defaults']['fastcgi_cache_zone'] = 'WEBSITE'
 default['site_defaults']['fastcgi_cache_valid'] = '60m'
 
 # Enable nginx fastcgi cache
-default['website']['fastcgi_cache'] = true
+default['nginx']['fastcgi_cache'] = true
 
 # Cache storage path
 default['nginx']['fastcgi_cache_path'] = '/var/cache/nginx'
