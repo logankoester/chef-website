@@ -8,6 +8,16 @@ data_bag('sites').each do |site_id|
   site = data_bag_item 'sites', site_id
   if config = site['letsencrypt']
 
+    base_dir = "/srv/http/#{config['domain']}"
+    ["#{base_dir}/ssl", "#{base_dir}/ssl/keys", "#{base_dir}/ssl/certs"].each do |dir|
+      directory dir do
+        owner 'popularresistance'
+        group 'http'
+        mode '0755'
+        action :create
+      end
+    end
+
     # Set up contact information. Note the mailto: notation
     node.default['acme']['contact'] = [ "mailto:#{config['email']}" ]
 
