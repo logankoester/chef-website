@@ -1,5 +1,6 @@
 if node['nginx']['fastcgi_cache']
   template "/etc/nginx/sites/fastcgi_cache.conf" do
+    action :create
     mode '0644'
     source 'nginx/fastcgi_cache.conf.erb'
     variables(
