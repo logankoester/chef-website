@@ -66,3 +66,5 @@ default['nginx']['fastcgi_cache_key'] = '$scheme$request_method$host$request_uri
 default['nginx']['fastcgi_hide_header'] = ''
 default['nginx']['fastcgi_ignore_headers'] = 'Cache-Control Expires Set-Cookie'
 default['nginx']['fastcgi_cache_use_stale'] = 'error timeout invalid_header http_500'
+
+default['nginx']['load_modules'] = ['/usr/lib/nginx/modules/ngx_http_cache_purge_module.so']
