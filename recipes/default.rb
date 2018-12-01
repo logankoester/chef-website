@@ -19,6 +19,7 @@ data_bag('sites').each do |site_id|
 end
 
 include_recipe 'website::user'
+include_recipe 'website::fastcgi_cache'
 include_recipe 'nginx::default'
 
 php_site_detected = false
@@ -111,5 +112,3 @@ include_recipe 'nginx::php_fpm' if php_site_detected
 include_recipe 'website::ssl' if ssl_site_detected
 include_recipe 'website::wordpress' if wordpress_site_detected
 include_recipe 'website::letsencrypt' if letsencrypt_detected
-
-include_recipe 'website::fastcgi_cache'
