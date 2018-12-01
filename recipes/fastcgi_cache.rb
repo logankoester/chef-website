@@ -6,6 +6,14 @@ if node['nginx']['fastcgi_cache']
   node.run_state['nginx_configure_flags'] =
     node.run_state['nginx_configure_flags'] | ['--with-ngx_cache_purge']
 
+  directory '/etc/nginx/sites' do
+    owner 'http'
+    group 'http'
+    mode '0600'
+    action :create
+    recursive true
+  end
+
   template "/etc/nginx/sites/fastcgi_cache.conf" do
     action :create
     mode '0644'
