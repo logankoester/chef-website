@@ -63,6 +63,6 @@ default['nginx']['fastcgi_keys_zone'] = 'WEBSITE:10m'
 default['nginx']['fastcgi_cache_inactive'] = '60m'
 
 default['nginx']['fastcgi_cache_key'] = '$scheme$request_method$host$request_uri'
-default['nginx']['fastcgi_hide_header'] = 'Set-Cookie'
+default['nginx']['fastcgi_hide_header'] = ''
 default['nginx']['fastcgi_ignore_headers'] = 'Cache-Control Expires Set-Cookie'
 default['nginx']['fastcgi_cache_use_stale'] = 'error timeout invalid_header http_500'
