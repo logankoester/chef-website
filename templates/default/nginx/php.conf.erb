@@ -13,6 +13,7 @@
   <% if @site['fastcgi_cache'] %>
     fastcgi_cache <%= @site['fastcgi_cache_zone'] %>;
     fastcgi_cache_valid <%= @site['fastcgi_cache_valid'] %>;
+    add_header X-Cache $upstream_cache_status;
   <% end %>
 
     include        fastcgi.conf;
