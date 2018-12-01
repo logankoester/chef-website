@@ -2,3 +2,4 @@ fastcgi_cache_path <%= @nginx['fastcgi_cache_path'] %> levels=<%= @nginx['fastcg
 fastcgi_cache_key "<%= @nginx['fastcgi_cache_key'] %>";
 fastcgi_hide_header "<%= @nginx['fastcgi_hide_header'] %>";
 fastcgi_ignore_headers <%= @nginx['fastcgi_ignore_headers'] %>;
+fastcgi_cache_use_stale <%= @nginx['fastcgi_cache_use_stale'] %>;
