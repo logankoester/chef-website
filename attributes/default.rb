@@ -39,3 +39,32 @@ default['site_defaults']['packages']['aur'] = []
 
 # Skip the 'user' recipe for this site.
 default['site_defaults']['skip_user'] = false
+
+# Enable nginx fastcgi cache for this site
+default['site_defaults']['fastcgi_cache'] = true
+default['site_defaults']['fastcgi_cache_zone'] = 'WEBSITE'
+default['site_defaults']['fastcgi_cache_valid'] = '60m'
+
+# Enable nginx fastcgi cache
+default['nginx']['fastcgi_cache'] = true
+
+# Cache storage path
+default['nginx']['fastcgi_cache_path'] = '/var/cache/nginx'
+
+# Hierarchy levels of a cache
+default['nginx']['fastcgi_cache_levels'] = '1:2'
+
+# All active keys and information about data are stored in a shared memory zone,
+# whose name and size are configured by the keys_zone parameter. One megabyte 
+# zone can store about 8 thousand keys.
+default['nginx']['fastcgi_keys_zone'] = 'WEBSITE:10m'
+
+# Cached data that are not accessed during the time specified by the inactive parameter get removed from the cache regardless of their freshness
+default['nginx']['fastcgi_cache_inactive'] = '60m'
+
+default['nginx']['fastcgi_cache_key'] = '$scheme$request_method$host$request_uri'
+default['nginx']['fastcgi_hide_header'] = ''
+default['nginx']['fastcgi_ignore_headers'] = 'Cache-Control Expires Set-Cookie'
+default['nginx']['fastcgi_cache_use_stale'] = 'error timeout invalid_header http_500'
+
+default['nginx']['load_modules'] = ['/usr/lib/nginx/modules/ngx_http_cache_purge_module.so']
