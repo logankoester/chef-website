@@ -152,6 +152,10 @@ If you're using GitLab rather than Github, you can specify that like this:
 }
 ```
 
+## Nginx Caching
+
+* New! See attributes.
+
 ## Running the tests
 
 This cookbook uses the [Foodcritic](http://www.foodcritic.io/) linter, [ChefSpec](http://sethvargo.github.io/chefspec/) for unit testing, and [ServerSpec](http://serverspec.org/) for integration testing via [Test Kitchen](http://kitchen.ci/) with the [kitchen-docker](https://github.com/portertech/kitchen-docker) driver.
